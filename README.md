@@ -42,5 +42,4 @@ The application combines three main features in a single project:
 
 ## How to Run
 1. Clone the repository:
-   ```bash
-   git clone <repository-url>
+   https://github.com/sAchyn119/Task4-of-Apexplanet.git
