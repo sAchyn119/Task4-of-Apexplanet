@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sachin Yadav | Multi-Page Project</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f9;
+  color: #333;
+  line-height: 1.6;
+}
+header {
+  background: #0077b5;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+}
+header h1 { font-size: 2rem; margin-bottom: 5px; }
+header p { margin-bottom: 10px; }
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+nav a:hover { text-decoration: underline; }
+
+section {
+  display: none;
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+section.active { display: block; }
+h2 {
+  text-align: center;
+  color: #0077b5;
+  margin-bottom: 20px;
+}
+
+.about-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+.profile-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 3px solid #0077b5;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.project-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+.project-card:hover { transform: translateY(-5px); }
+.project-card h3 { margin-bottom: 10px; color: #0077b5; }
+
+.contact-links {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.contact-links a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  background: #0077b5;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+.contact-links a:hover { background: #005582; }
+.contact-form {
+  max-width: 600px;
+  margin: auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.contact-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #0077b5;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.contact-form button {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  background: #0077b5;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+.contact-form button:hover { background: #005582; }
+#formMsg {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  display: none;
+}
+
+.todo-container {
+  max-width: 400px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.todo-container input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  width: 70%;
+}
+.todo-container button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  background: #0077b5;
+  color: #fff;
+  cursor: pointer;
+}
+ul { list-style: none; margin-top: 10px; padding-left: 0; }
+li {
+  background: #f0f4f9;
+  padding: 10px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+li.completed { text-decoration: line-through; background: #d1ffd6; }
+.actions button {
+  margin-left: 4px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.complete-btn { background: #4caf50; color: #fff; }
+.delete-btn { background: #f44336; color: #fff; }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.filters select,
+.filters input { padding: 6px; border-radius: 5px; border: 1px solid #ccc; }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  padding: 10px;
+}
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.product-card:hover { transform: scale(1.03); }
+.product-card img { width: 100%; height: 200px; object-fit: contain; background: #f1f1f1; }
+.product-card .info { padding: 10px; }
+.product-card h4 { margin: 5px 0; color: #333; }
+.product-card p { margin: 3px 0; font-size: 0.9rem; color: #666; }
+.product-card .price { font-weight: bold; color: #0077b5; }
+.rating { color: gold; font-size: 0.9rem; }
+
+footer {
+  background: #0077b5;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 20px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Sachin Yadav</h1>
+  <p>Web Developer | CSE Student</p>
+  <nav>
+    <a onclick="showSection('portfolio')">Portfolio</a>
+    <a onclick="showSection('todo')">To-Do List</a>
+    <a onclick="showSection('products')">Product Listing</a>
+  </nav>
+</header>
+
+<section id="portfolio" class="active">
+  <h2>About Me</h2>
+  <div class="about-container">
+    <img src="photo.jpg" alt="Sachin Yadav" class="profile-img">
+    <p>Hi, I'm <strong>Sachin Yadav</strong> — a passionate web developer and computer science student.  
+        I love building projects with HTML, CSS, and JavaScript while exploring new technologies.  
+        My goal is to become a skilled software developer and contribute to impactful projects.
+    </p>
+  </div><br>
+
+  <h2>Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card"><h3>💪 BMI Calculator</h3>
+        <p>A simple app that calculates Body Mass Index using height and weight.</p></div>
+    <div class="project-card"><h3>🌦 Weather App</h3>
+        <p>Fetches real-time weather data using an API and displays it to users.</p></div>
+    <div class="project-card"><h3>🔑 Password Generator</h3>
+        <p>Generates secure random passwords with customizable length.</p></div>
+    <div class="project-card"><h3>📝 To-Do App</h3>
+        <p>A task management app with LocalStorage support for saving tasks.</p></div>
+    <div class="project-card"><h3>🛍 Product Listing</h3>
+        <p>A product catalog with filtering and sorting options for better browsing.</p></div>
+  </div><br>
+
+  <h2>Contact Me</h2>
+  <div class="contact-links">
+    <a href="mailto:sachin@example.com">📧 Email</a>
+    <a href="https://github.com/sAchyn119" target="_blank">💻 GitHub</a>
+    <a href="https://linkedin.com/in/sachin-yadav-41ab12278/" target="_blank">🔗 LinkedIn</a>
+  </div>
+
+  <div class="contact-form">
+    <form id="contactForm">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required>
+      <label for="message">Your Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="formMsg">✅ Your message has been submitted successfully!</p>
+  </div>
+</section>
+
+<section id="todo">
+  <h2>To-Do List</h2>
+  <div class="todo-container">
+    <div class="input-group">
+      <input type="text" id="taskInput" placeholder="Add a new task...">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="taskList"></ul>
+  </div>
+</section>
+
+<section id="products">
+  <h2>Product Listing</h2>
+  <div class="filters">
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Fashion">Fashion</option>
+      <option value="Furniture">Furniture</option>
+      <option value="Books">Books</option>
+      <option value="Sports">Sports</option>
+      <option value="Accessories">Accessories</option>
+    </select>
+    <input type="number" id="minPrice" placeholder="Min Price">
+    <input type="number" id="maxPrice" placeholder="Max Price">
+    <select id="sortFilter">
+      <option value="default">Sort By</option>
+      <option value="low-high">Price: Low to High</option>
+      <option value="high-low">Price: High to Low</option>
+      <option value="rating">Rating</option>
+    </select>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Sachin Yadav | All Rights Reserved</p>
+</footer>
+<script>
+  function showSection(id) {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => section.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  const contactForm = document.getElementById("contactForm");
+  const formMsg = document.getElementById("formMsg");
+
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    formMsg.style.display = "block";
+    contactForm.reset();
+    setTimeout(() => {
+      formMsg.style.display = "none";
+    }, 4000);
+  });
+
+  const taskInput = document.getElementById("taskInput");
+  const taskList = document.getElementById("taskList");
+
+  window.onload = function () {
+    loadTasks();
+    displayProducts(products); 
+  };
+
+  function loadTasks() {
+    const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    storedTasks.forEach(task => {
+      addTaskToList(task.text, task.completed);
+    });
+  }
+
+  function saveTasks() {
+    const tasks = [];
+    const listItems = document.querySelectorAll("#taskList li");
+    listItems.forEach(li => {
+      tasks.push({
+        text: li.firstChild.textContent,
+        completed: li.classList.contains("completed")
+      });
+    });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
+  function addTask() {
+    const taskText = taskInput.value.trim();
+    if (taskText === "") return;
+    addTaskToList(taskText, false);
+    taskInput.value = "";
+    saveTasks();
+  }
+
+  function addTaskToList(taskText, isCompleted) {
+    const li = document.createElement("li");
+    li.textContent = taskText;
+    if (isCompleted) li.classList.add("completed");
+
+    const actions = document.createElement("div");
+    actions.classList.add("actions");
+
+    const completeBtn = document.createElement("button");
+    completeBtn.textContent = "✔";
+    completeBtn.classList.add("complete-btn");
+    completeBtn.onclick = function () {
+      li.classList.toggle("completed");
+      saveTasks();
+    };
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "✖";
+    deleteBtn.classList.add("delete-btn");
+    deleteBtn.onclick = function () {
+      li.remove();
+      saveTasks();
+    };
+
+    actions.appendChild(completeBtn);
+    actions.appendChild(deleteBtn);
+    li.appendChild(actions);
+    taskList.appendChild(li);
+  }
+
+  taskInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") addTask();
+  });
+
+  // --- Product Listing ---
+  const products = [
+    {name:"Nike Shoes", category:"Fashion", price:4000, rating:4.3, image:
+    "https://images.unsplash.com/photo-1542291026-7eec264c27ff"},
+    {name:"HP Laptop", category:"Electronics", price:55000, rating:4.5, image:
+    "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"},
+    {name:"Wooden Table", category:"Furniture", price:12999, rating:4.0, image:
+    "https://images.unsplash.com/photo-1524758631624-e2822e304c36"},
+    {name:"Atomic Habits", category:"Books", price:600, rating:4.7, image:
+    "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f"},
+    {name:"Yoga Mat", category:"Sports", price:899, rating:4.3, image
+    :"https://images.unsplash.com/photo-1605296867304-46d5465a13f1"},
+    {name:"Wallet", category:"Accessories", price:1499, rating:4.3, image:
+    "https://images.unsplash.com/photo-1523289333742-be1143f6b766"},
+      {id: 1, name: "Nike Running Shoes", category: "Fashion", price: 4000, rating: 4.3, image:
+       "https://images.unsplash.com/photo-1542291026-7eec264c27ff"},
+        
+      {id: 2, name: "HP Pavilion Laptop", category: "Electronics", price: 55000, rating: 4.5, image:
+       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"},
+      {id: 3, name: "Dell Inspiron", category: "Electronics", price: 60000, rating: 4.3, image:
+       "https://images.unsplash.com/photo-1518770660439-4636190af475"},
+      {id: 4, name: "The Great Gatsby", category: "Books", price: 500, rating: 4.7, image: 
+      "https://images.unsplash.com/photo-1512820790803-83ca734da794"},
+      {id: 5, name: "Atomic Habits", category: "Books", price: 600, rating: 4.9, image: 
+      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f"},
+      {id: 6, name: "Harry Potter Series", category: "Books", price: 2000, rating: 4.8, image:
+       "https://images.unsplash.com/photo-1589998059171-988d887df646"},
+  // Electronics
+
+  { id: 7, name: "Canon DSLR Camera", category: "Electronics", price: 45999, rating: 4.6, image:
+   "https://images.unsplash.com/photo-1504215680853-026ed2a45def" },
+
+  { id: 8, name: "Designer Handbag", category: "Fashion", price: 3499, rating: 4.6, image: 
+  "https://images.unsplash.com/photo-1584917865442-de89df76afd3" },
+
+  // Furniture
+  { id: 9, name: "Wooden Table", category: "Furniture", price: 14999, rating: 4.5, image: 
+  "https://images.unsplash.com/photo-1524758631624-e2822e304c36" },
+  { id: 10, name: "Modern Sofa", category: "Furniture", price: 24999, rating: 4.3, image:
+   "https://images.unsplash.com/photo-1555041469-a586c61ea9bc" },
+  { id: 11, name: "Bookshelf", category: "Furniture", price: 5999, rating: 4.2, image:
+   "https://images.unsplash.com/photo-1586023492125-27b2c045efd7" },
+
+  // Sports
+  { id: 12, name: "Football", category: "Sports", price: 1499, rating: 4.1, image: 
+  "https://images.unsplash.com/photo-1543168256-418811576931" },
+  { id: 13, name: "Basketball", category: "Sports", price: 1299, rating: 4.0, image:
+   "https://images.unsplash.com/photo-1517649763962-0c623066013b" },
+  
+  { id: 14, name: "Cap", category: "Accessories", price: 999, rating: 4.1, image:
+   "https://images.unsplash.com/photo-1519681393784-d120267933ba" },
+  { id: 15, name: "Wallet", category: "Accessories", price: 1499, rating: 4.2, image:
+   "https://images.unsplash.com/photo-1523289333742-be1143f6b766" },
+ { id: 1, name: "Cricket Kit", category: "Sports", price: 7999, rating: 4.2, image:
+  "https://images.unsplash.com/photo-1622396481267-9d3a9a5a7da2" },
+  
+  {
+    id: 16,
+    name: "Wooden Table",
+    category: "Furniture",
+    price: 12999,
+    rating: 4.0,
+    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36"
+  },
+
+  // Electronics
+  { id: 17, name: "MacBook Pro 14-inch", category: "Electronics", price: 149999, rating: 4.8, image:
+   "https://images.unsplash.com/photo-1517336714731-489689fd1ca8" },
+  
+  // Furniture
+  { id: 18, name: "Dining Table Set", category: "Furniture", price: 17999, rating: 4.4, image: 
+  "https://images.unsplash.com/photo-1505691938895-1758d7feb511" },
+  { id: 19, name: "Rocking Chair", category: "Furniture", price: 7499, rating: 4.2, image: 
+  "https://images.unsplash.com/photo-1505691938895-1758d7feb511" },
+  { id: 20, name: "Wardrobe", category: "Furniture", price: 21999, rating: 4.5, image: 
+  "https://images.unsplash.com/photo-1616627452015-98c87a9b69d5" },
+
+  // Sports
+  { id: 21, name: "Yoga Mat", category: "Sports", price: 899, rating: 4.3, image: 
+  "https://images.unsplash.com/photo-1605296867304-46d5465a13f1" },
+  { id: 22, name: "Mountain Bike", category: "Sports", price: 28999, rating: 4.6, image:
+   "https://images.unsplash.com/photo-1518655048521-f130df041f66" },
+
+  // Accessories
+  { id: 24, name: "Smart Sunglasses", category: "Accessories", price: 3499, rating: 4.4, image:
+   "https://images.unsplash.com/photo-1577803645773-f96470509666" },
+  { id: 25, name: "Luxury Watch", category: "Accessories", price: 24999, rating: 4.7, image: 
+  "https://images.unsplash.com/photo-1518544889280-c4f05e3fc3cf" },
+  { id: 26, name: "Travel Backpack", category: "Accessories", price: 2999, rating: 4.5, image:
+   "https://images.unsplash.com/photo-1504280390368-812776dedb72" },
+  { id: 27, name: "Leather Wallet", category: "Accessories", price: 1799, rating: 4.3, image:
+   "https://images.unsplash.com/photo-1523289333742-be1143f6b766" },
+  ];
+
+  const productGrid = document.getElementById("productGrid");
+
+  function displayProducts(list) {
+    productGrid.innerHTML = "";
+    list.forEach(product => {
+      const card = document.createElement("div");
+      card.classList.add("product-card");
+      card.innerHTML = `
+        <img src="${product.image}?w=400" alt="${product.name}">
+        <div class="info">
+          <h4>${product.name}</h4>
+          <p class="price">₹${product.price}</p>
+          <p class="rating">⭐ ${product.rating}</p>
+          <p>${product.category}</p>
+        </div>
+      `;
+      productGrid.appendChild(card);
+    });
+  }
+
+  function filterAndSort() {
+    const category = document.getElementById("categoryFilter").value;
+    const minPrice = parseInt(document.getElementById("minPrice").value) || 0;
+    const maxPrice = parseInt(document.getElementById("maxPrice").value) || Infinity;
+    const sort = document.getElementById("sortFilter").value;
+
+    let filtered = products.filter(product => {
+      return (category === "all" || product.category === category) &&
+             product.price >= minPrice &&
+             product.price <= maxPrice;
+    });
+
+    if (sort === "low-high") filtered.sort((a,b) => a.price - b.price);
+    if (sort === "high-low") filtered.sort((a,b) => b.price - a.price);
+    if (sort === "rating") filtered.sort((a,b) => b.rating - a.rating);
+
+    displayProducts(filtered);
+  }
+
+  const filterInputs = document.querySelectorAll(".filters select, .filters input");
+  filterInputs.forEach(input => {
+    input.addEventListener("change", filterAndSort);
+    input.addEventListener("keyup", filterAndSort);
+  });
+</script>
+</body>
+</html>
