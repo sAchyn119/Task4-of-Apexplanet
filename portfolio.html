@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sachin Yadav | Portfolio</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background: #f4f4f9;
+      color: #333;
+    }
+
+    header {
+      background: #0077b5;
+      color: #fff;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #0077b5;
+    }
+
+    /* About Section */
+    .about-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #0077b5;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-card h3 {
+      margin-bottom: 10px;
+      color: #0077b5;
+    }
+
+    /* Contact Section */
+    .contact-links {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .contact-links a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background: #0077b5;
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .contact-links a:hover {
+      background: #005582;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #0077b5;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .contact-form button {
+      background: #0077b5;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+    }
+
+    .contact-form button:hover {
+      background: #005582;
+    }
+
+    #formMsg {
+      color: green;
+      font-weight: bold;
+      margin-top: 10px;
+      display: none;
+      text-align: center;
+    }
+
+    footer {
+      background: #0077b5;
+      color: #fff;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Sachin Yadav</h1>
+    <p>Web Developer | CSE Student</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <div class="about-container">
+      <img src="photo.jpg" alt="Sachin Yadav" class="profile-img">
+      <p>
+        Hi, I'm <strong>Sachin Yadav</strong> — a passionate web developer and computer science student.  
+        I love building projects with HTML, CSS, and JavaScript while exploring new technologies.  
+        My goal is to become a skilled software developer and contribute to impactful projects.  
+      </p>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>💪 BMI Calculator</h3>
+        <p>A simple app that calculates Body Mass Index using height and weight.</p>
+      </div>
+      <div class="project-card">
+        <h3>🌦 Weather App</h3>
+        <p>Fetches real-time weather data using an API and displays it to users.</p>
+      </div>
+      <div class="project-card">
+        <h3>🔑 Random Password Generator</h3>
+        <p>Generates secure random passwords with customizable length.</p>
+      </div>
+      <div class="project-card">
+        <h3>📝 To-Do List App</h3>
+        <p>A task management app with LocalStorage support for saving tasks.</p>
+      </div>
+      <div class="project-card">
+        <h3>🛍 Product Listing Page</h3>
+        <p>A product catalog with filtering and sorting options for better browsing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <div class="contact-links">
+      <a href="mailto:sachin@example.com">📧 Email</a>
+      <a href="https://github.com/yourgithub" target="_blank">💻 GitHub</a>
+      <a href="https://linkedin.com/in/yourlinkedin" target="_blank">🔗 LinkedIn</a>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+      <form id="contactForm">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+      <p id="formMsg">✅ Your message has been submitted successfully!</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Sachin Yadav | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // stop default submit
+      document.getElementById("formMsg").style.display = "block";
+      this.reset();
+      setTimeout(() => {
+        document.getElementById("formMsg").style.display = "none";
+      }, 4000);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Listing Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f8f9fa;
+    }
+
+    header {
+      background: #007bff;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .filters select, .filters input {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: scale(1.03);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      background: #f1f1f1;
+    }
+
+    .product-card .info {
+      padding: 1rem;
+    }
+
+    .product-card h4 {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .product-card p {
+      margin: 0.3rem 0;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .product-card .price {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .rating {
+      color: gold;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🛍 Product Listing</h1>
+  </header>
+
+  <div class="filters">
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Fashion">Fashion</option>
+      <option value="Furniture">Furniture</option>
+      <option value="Books">Books</option>
+      <option value="Sports">Sports</option>
+      <option value="Accessories">Accessories</option>
+    </select>
+
+    <input type="number" id="minPrice" placeholder="Min Price">
+    <input type="number" id="maxPrice" placeholder="Max Price">
+
+    <select id="sortFilter">
+      <option value="default">Sort By</option>
+      <option value="low-high">Price: Low to High</option>
+      <option value="high-low">Price: High to Low</option>
+      <option value="rating">Rating</option>
+    </select>
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+
+  <script>
+    const products = [
+      {id: 5, name: "Nike Running Shoes", category: "Fashion", price: 4000, rating: 4.3, image:
+       "https://images.unsplash.com/photo-1542291026-7eec264c27ff"},
+      {id: 8, name: "HP Pavilion Laptop", category: "Electronics", price: 55000, rating: 4.5, image:
+       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"},
+      {id: 9, name: "Dell Inspiron", category: "Electronics", price: 60000, rating: 4.3, image:
+       "https://images.unsplash.com/photo-1518770660439-4636190af475"},
+      {id: 13, name: "The Great Gatsby", category: "Books", price: 500, rating: 4.7, image: 
+      "https://images.unsplash.com/photo-1512820790803-83ca734da794"},
+      {id: 14, name: "Atomic Habits", category: "Books", price: 600, rating: 4.9, image: 
+      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f"},
+      {id: 15, name: "Harry Potter Series", category: "Books", price: 2000, rating: 4.8, image:
+       "https://images.unsplash.com/photo-1589998059171-988d887df646"},
+  // Electronics
+
+  { id: 4, name: "Canon DSLR Camera", category: "Electronics", price: 45999, rating: 4.6, image:
+   "https://images.unsplash.com/photo-1504215680853-026ed2a45def" },
+
+  { id: 12, name: "Designer Handbag", category: "Fashion", price: 3499, rating: 4.6, image: 
+  "https://images.unsplash.com/photo-1584917865442-de89df76afd3" },
+
+  // Furniture
+  { id: 14, name: "Wooden Table", category: "Furniture", price: 12999, rating: 4.0, image: 
+  "https://images.unsplash.com/photo-1524758631624-e2822e304c36" },
+  { id: 15, name: "Modern Sofa", category: "Furniture", price: 24999, rating: 4.3, image:
+   "https://images.unsplash.com/photo-1555041469-a586c61ea9bc" },
+  { id: 17, name: "Bookshelf", category: "Furniture", price: 5999, rating: 4.2, image:
+   "https://images.unsplash.com/photo-1586023492125-27b2c045efd7" },
+
+  // Sports
+  { id: 19, name: "Football", category: "Sports", price: 1499, rating: 4.1, image: 
+  "https://images.unsplash.com/photo-1543168256-418811576931" },
+  { id: 20, name: "Basketball", category: "Sports", price: 1299, rating: 4.0, image:
+   "https://images.unsplash.com/photo-1517649763962-0c623066013b" },
+  
+  { id: 26, name: "Cap", category: "Accessories", price: 999, rating: 4.1, image:
+   "https://images.unsplash.com/photo-1519681393784-d120267933ba" },
+  { id: 27, name: "Wallet", category: "Accessories", price: 1499, rating: 4.2, image:
+   "https://images.unsplash.com/photo-1523289333742-be1143f6b766" },
+
+  
+  {
+    id: 19,
+    name: "Wooden Table",
+    category: "Furniture",
+    price: 12999,
+    rating: 4.0,
+    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36"
+  },
+
+  // Electronics
+  { id: 1, name: "MacBook Pro 14-inch", category: "Electronics", price: 149999, rating: 4.8, image:
+   "https://images.unsplash.com/photo-1517336714731-489689fd1ca8" },
+  
+  // Furniture
+  { id: 9, name: "Dining Table Set", category: "Furniture", price: 17999, rating: 4.4, image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511" },
+  { id: 10, name: "Study Desk", category: "Furniture", price: 5999, rating: 4.3, image: "https://images.unsplash.com/photo-1616627452128-f86e7031e74d" },
+  { id: 11, name: "Rocking Chair", category: "Furniture", price: 7499, rating: 4.2, image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511" },
+  { id: 12, name: "Wardrobe", category: "Furniture", price: 21999, rating: 4.5, image: "https://images.unsplash.com/photo-1616627452015-98c87a9b69d5" },
+
+  // Sports
+  { id: 13, name: "Yoga Mat", category: "Sports", price: 899, rating: 4.3, image: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1" },
+  { id: 14, name: "Running Shoes", category: "Sports", price: 3499, rating: 4.4, image: "https://images.unsplash.com/photo-1528701800489-20be9c6e5b5b" },
+  { id: 15, name: "Mountain Bike", category: "Sports", price: 28999, rating: 4.6, image: "https://images.unsplash.com/photo-1518655048521-f130df041f66" },
+  { id: 16, name: "Cricket Kit", category: "Sports", price: 7999, rating: 4.2, image: "https://images.unsplash.com/photo-1622396481267-9d3a9a5a7da2" },
+
+  // Accessories
+  { id: 17, name: "Smart Sunglasses", category: "Accessories", price: 3499, rating: 4.4, image: "https://images.unsplash.com/photo-1577803645773-f96470509666" },
+  { id: 18, name: "Luxury Watch", category: "Accessories", price: 24999, rating: 4.7, image: "https://images.unsplash.com/photo-1518544889280-c4f05e3fc3cf" },
+  { id: 19, name: "Travel Backpack", category: "Accessories", price: 2999, rating: 4.5, image: "https://images.unsplash.com/photo-1504280390368-812776dedb72" },
+  { id: 20, name: "Leather Wallet", category: "Accessories", price: 1799, rating: 4.3, image: "https://images.unsplash.com/photo-1523289333742-be1143f6b766" },
+
+    ];
+
+    const grid = document.getElementById("productGrid");
+
+    function displayProducts(list) {
+      grid.innerHTML = "";
+      list.forEach(p => {
+        grid.innerHTML += `
+          <div class="product-card">
+            <img src="${p.image}?w=400" alt="${p.name}">
+            <div class="info">
+              <h4>${p.name}</h4>
+              <p class="price">₹${p.price}</p>
+              <p class="rating">⭐ ${p.rating}</p>
+              <p>${p.category}</p>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function filterAndSort() {
+      let category = document.getElementById("categoryFilter").value;
+      let minPrice = parseInt(document.getElementById("minPrice").value) || 0;
+      let maxPrice = parseInt(document.getElementById("maxPrice").value) || Infinity;
+      let sort = document.getElementById("sortFilter").value;
+
+      let filtered = products.filter(p => 
+        (category === "all" || p.category === category) &&
+        p.price >= minPrice &&
+        p.price <= maxPrice
+      );
+
+      if (sort === "low-high") filtered.sort((a,b) => a.price - b.price);
+      if (sort === "high-low") filtered.sort((a,b) => b.price - a.price);
+      if (sort === "rating") filtered.sort((a,b) => b.rating - a.rating);
+
+      displayProducts(filtered);
+    }
+
+    document.querySelectorAll(".filters select, .filters input").forEach(el => {
+      el.addEventListener("change", filterAndSort);
+      el.addEventListener("keyup", filterAndSort);
+    });
+
+    // Initial Display
+    displayProducts(products);
+  </script>
+
+</body>
+</html>
